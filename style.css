@@ -9,20 +9,25 @@
 }
 
 :root {
-    --primary-green: #2e7d32;   /* Brand Color */
-    --secondary-green: #4caf50; /* Accent Color */
+    --primary-green: #2e7d32;
+    --secondary-green: #4caf50;
     --dark-text: #333;
     --light-text: #f4f4f4;
     --bg-light: #f9fbf9;
-    --nav-height-expanded: 110px; /* Variables for calculation */
-    --nav-height-shrunk: 60px;
+    
+    --top-bar-height: 45px;
+    
+    /* DYNAMIC VARIABLES (Controlled by JS) */
+    /* We start at the full expanded sizes */
+    --nav-current-height: 110px; 
+    --logo-current-height: 90px;
 }
 
 html {
     scroll-behavior: smooth;
-    /* GLOBAL FIX for anchor links hidden under sticky header */
-    /* We use the larger height to be safe so headers are never cut off */
-    scroll-padding-top: var(--nav-height-expanded);
+    /* FIX: This now uses the dynamic height variable. 
+       Wherever the nav is sized at the moment, the link will land below it. */
+    scroll-padding-top: var(--nav-current-height);
 }
 
 body {
@@ -50,9 +55,9 @@ body {
     background-color: var(--bg-light);
 }
 
-/* Extra buffer for specific service blocks when linked directly */
+/* Small buffer for services */
 .service-block {
-    scroll-margin-top: 130px; /* 110px header + 20px breathing room */
+    scroll-margin-top: 20px; 
 }
 
 /* =========================================
@@ -103,19 +108,29 @@ body {
 }
 
 /* =========================================
-   4. HEADER & TOP BAR
+   4. HEADER WRAPPER & TOP BAR
    ========================================= */
+#global-header {
+    display: contents; /* Allows Navbar to stick to body */
+}
+
 .top-bar {
     background-color: #1b5e20;
     color: white;
     padding: 10px 0;
     font-size: 0.9rem;
+    height: var(--top-bar-height);
+    display: flex;
+    align-items: center;
+    position: relative; 
+    z-index: 1001; 
 }
 
 .top-bar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 .contact-info span {
@@ -123,27 +138,27 @@ body {
 }
 
 /* =========================================
-   5. NAVIGATION BAR (STICKY & SHRINKING)
+   5. NAVIGATION BAR (LINEAR SHRINK)
    ========================================= */
 .navbar {
     background: white;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    /* REVERTED: Sticky position */
     position: sticky; 
     top: 0;
     z-index: 1000;
-    /* Smooth transition for the shrink effect */
-    transition: all 0.4s ease-in-out;
+    width: 100%;
+    /* NOTE: No transition on height/padding to prevent jitter with JS scroll logic */
 }
 
 .navbar .container {
     display: flex;
     justify-content: space-between;
-    align-items: stretch; /* Full height items */
-    /* Initial Large Height */
-    height: var(--nav-height-expanded);
+    align-items: stretch;
+    
+    /* HERE IS THE MAGIC: The height is set by the variable */
+    height: var(--nav-current-height);
+    
     padding: 0 20px;
-    transition: height 0.4s ease-in-out;
 }
 
 /* LOGO STYLES */
@@ -153,10 +168,10 @@ body {
 }
 
 .logo img {
-    /* Initial Large Logo */
-    height: 90px; 
+    /* Height set by variable */
+    height: var(--logo-current-height);
+    
     width: auto;
-    transition: height 0.4s ease-in-out;
 }
 
 /* NAV MENU LINKS */
@@ -178,24 +193,15 @@ body {
     text-decoration: none;
     color: var(--dark-text);
     font-weight: 500;
-    transition: 0.3s;
+    transition: color 0.3s; /* Only transition color */
     font-size: 1rem;
     display: flex;
     align-items: center;
-    height: 100%; /* Ensures click area is full height */
+    height: 100%; 
 }
 
 .nav-menu a:hover {
     color: var(--primary-green);
-}
-
-/* --- SHRINK STATE (Triggered by JS) --- */
-.navbar.shrink .container {
-    height: var(--nav-height-shrunk); /* Shrinks to ~60px */
-}
-
-.navbar.shrink .logo img {
-    height: 50px; /* Shrinks to ~55% of original */
 }
 
 /* --- DROPDOWN STYLING --- */
@@ -206,8 +212,6 @@ body {
     min-width: 280px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     z-index: 1;
-    /* UNIVERSAL SOLUTION: 100% always means "Bottom of container" */
-    /* Since container shrinks, this moves up automatically */
     top: 100%; 
     left: 0;
     border-top: 3px solid var(--primary-green);
@@ -250,7 +254,7 @@ body {
 .page-header {
     background-color: var(--primary-green);
     color: white;
-    padding: 30px 0;
+    padding: 10px 0;
     text-align: center;
 }
 
@@ -345,18 +349,10 @@ footer {
         align-items: center;
     }
     
-    /* Disable shrink effect on mobile to prevent jumpiness */
-    .navbar.shrink .container {
-        height: auto;
-    }
-    .navbar.shrink .logo img {
-        height: 50px; /* Keep mobile logo size consistent */
-    }
-
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 120px; /* Adjust if needed based on topbar+logo */
+        top: 140px; 
         flex-direction: column;
         background-color: white;
         width: 100%;
@@ -401,6 +397,6 @@ footer {
     }
     
     .logo img {
-        height: 50px;
+        height: 70px;
     }
 }
