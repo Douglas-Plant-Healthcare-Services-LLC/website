@@ -1,42 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Douglas Plant Healthcare Services LLC</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-shadow: 1px 1px 4px #000;
-    }
-    .content {
-      text-align: center;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 40px;
-      border-radius: 12px;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 1.25rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Douglas Plant Healthcare Services LLC | NJ Arborists</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <div class="content">
-    <h1>Douglas Plant Healthcare Services LLC</h1>
-    <p>Work in Progress</p>
-  </div>
+
+    <div class="top-bar">
+        <div class="container">
+            <div class="contact-info">
+                <span><i class="fas fa-phone-alt"></i> 732-732-2712</span>
+                <span><i class="fas fa-map-marker-alt"></i> Serving Monmouth County, NJ</span>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="Images/logo_crop.png" alt="Douglas Plant Healthcare Services">
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="guardian.html">Guardian Program</a></li>
+                
+                <li class="dropdown">
+                    <a href="services.html">Services <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="services.html#diagnosis">Plant Health Diagnosis</a></li>
+                        <li><a href="services.html#fertilization">Fertilization & Soil Rx</a></li>
+                        <li><a href="services.html#insects">Insect & Disease Treatment</a></li>
+                        <li><a href="services.html#tick">Tick & Mosquito Control</a></li>
+                        <li><a href="services.html#deer">Deer Repellant Programs</a></li>
+                        <li><a href="services.html#pruning">Expert Tree Pruning</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="commercial.html">Commercial</a></li>
+                <li><a href="portal.html" class="btn-nav">Customer Portal</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>Trusted Local Arborists Serving Spring Lake, NJ</h1>
+            <p>With more than 30 years of experience, Douglas Plant Healthcare delivers expertise and integrity homeowners across Monmouth County can trust.</p>
+            <a href="mailto:info@douglasplanthealthcare.com" class="btn-primary">Request an Estimate</a>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Douglas PHC Difference</h2>
+            </div>
+            <div class="service-list-container">
+                <div class="service-card">
+                    <i class="fas fa-certificate fa-2x"></i>
+                    <h3>ISA Certified Arborists</h3>
+                    <p>Rigorous training in pest and disease management.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-microscope fa-2x"></i>
+                    <h3>Accurate Diagnosis</h3>
+                    <p>Ensures treatments target the true cause, not just symptoms.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-leaf fa-2x"></i>
+                    <h3>Preservation-First</h3>
+                    <p>A philosophy that treats and saves trees & shrubs whenever possible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-light">
+        <div class="container">
+            <h2>Tree Health Starts Here</h2>
+            <h3>Disease & Pest Management Tree Services in Rumson</h3>
+            <p>Insects and diseases prey on distressed trees, especially when they lack proper nutrients, light, or water. Urban stresses like drought, construction, and pollution often weaken trees, leaving them open to attack.</p>
+            <p>At Douglas Plant Healthcare, our ISA Certified Arborists provide professional disease and pest management to diagnose problems and restore health before it’s too late. We identify whether stress is caused by disease, chewing or boring insects, or other environmental issues—and build the right treatment plan for lasting recovery. We proudly serve the Jersey Shore area.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Douglas Plant Healthcare Services LLC. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
