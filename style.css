@@ -250,7 +250,7 @@ body {
 .page-header {
     background-color: var(--primary-green);
     color: white;
-    padding: 60px 0;
+    padding: 30px 0;
     text-align: center;
 }
 
@@ -350,7 +350,7 @@ footer {
         height: auto;
     }
     .navbar.shrink .logo img {
-        height: 70px; /* Keep mobile logo size consistent */
+        height: 50px; /* Keep mobile logo size consistent */
     }
 
     .nav-menu {
