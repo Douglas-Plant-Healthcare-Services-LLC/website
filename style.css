@@ -9,11 +9,20 @@
 }
 
 :root {
-    --primary-green: #2e7d32;   /* Deep natural green (Brand Color) */
-    --secondary-green: #4caf50; /* Brighter accent green */
-    --dark-text: #333;          /* Standard dark grey text */
-    --light-text: #f4f4f4;      /* Off-white text */
-    --bg-light: #f9fbf9;        /* Very pale green background for sections */
+    --primary-green: #2e7d32;   /* Brand Color */
+    --secondary-green: #4caf50; /* Accent Color */
+    --dark-text: #333;
+    --light-text: #f4f4f4;
+    --bg-light: #f9fbf9;
+    --nav-height-expanded: 110px; /* Variables for calculation */
+    --nav-height-shrunk: 60px;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* GLOBAL FIX for anchor links hidden under sticky header */
+    /* We use the larger height to be safe so headers are never cut off */
+    scroll-padding-top: var(--nav-height-expanded);
 }
 
 body {
@@ -27,20 +36,23 @@ body {
 /* =========================================
    2. UTILITY CLASSES
    ========================================= */
-/* Container keeps content centered and limits width */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Standard padding for all sections */
 .section-padding {
     padding: 60px 0;
 }
 
 .bg-light {
     background-color: var(--bg-light);
+}
+
+/* Extra buffer for specific service blocks when linked directly */
+.service-block {
+    scroll-margin-top: 130px; /* 110px header + 20px breathing room */
 }
 
 /* =========================================
@@ -60,7 +72,7 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: #1b5e20; /* Darker green on hover */
+    background-color: #1b5e20;
 }
 
 .btn-secondary {
@@ -80,11 +92,21 @@ body {
     color: white;
 }
 
+.btn-nav {
+    background-color: var(--secondary-green);
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 4px;
+    height: auto !important;
+    display: inline-block !important;
+    line-height: normal;
+}
+
 /* =========================================
    4. HEADER & TOP BAR
    ========================================= */
 .top-bar {
-    background-color: #1b5e20; /* Darkest Green */
+    background-color: #1b5e20;
     color: white;
     padding: 10px 0;
     font-size: 0.9rem;
@@ -101,38 +123,55 @@ body {
 }
 
 /* =========================================
-   5. NAVIGATION BAR & DROPDOWN
+   5. NAVIGATION BAR (STICKY & SHRINKING)
    ========================================= */
 .navbar {
     background: white;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: sticky; /* Sticks to top when scrolling */
+    /* REVERTED: Sticky position */
+    position: sticky; 
     top: 0;
     z-index: 1000;
+    /* Smooth transition for the shrink effect */
+    transition: all 0.4s ease-in-out;
 }
 
 .navbar .container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
+    align-items: stretch; /* Full height items */
+    /* Initial Large Height */
+    height: var(--nav-height-expanded);
+    padding: 0 20px;
+    transition: height 0.4s ease-in-out;
 }
 
-/* LOGO SIZE - Increased by 50% as requested */
-.logo img {
-    height: 90px; 
-    width: auto;
-}
-
-.nav-menu {
-    list-style: none;
+/* LOGO STYLES */
+.logo {
     display: flex;
     align-items: center;
 }
 
+.logo img {
+    /* Initial Large Logo */
+    height: 90px; 
+    width: auto;
+    transition: height 0.4s ease-in-out;
+}
+
+/* NAV MENU LINKS */
+.nav-menu {
+    list-style: none;
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+}
+
 .nav-menu li {
     margin-left: 20px;
-    position: relative; /* Needed for dropdown positioning */
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .nav-menu a {
@@ -141,28 +180,42 @@ body {
     font-weight: 500;
     transition: 0.3s;
     font-size: 1rem;
+    display: flex;
+    align-items: center;
+    height: 100%; /* Ensures click area is full height */
 }
 
 .nav-menu a:hover {
     color: var(--primary-green);
 }
 
-/* --- Dropdown Styling --- */
+/* --- SHRINK STATE (Triggered by JS) --- */
+.navbar.shrink .container {
+    height: var(--nav-height-shrunk); /* Shrinks to ~60px */
+}
+
+.navbar.shrink .logo img {
+    height: 50px; /* Shrinks to ~55% of original */
+}
+
+/* --- DROPDOWN STYLING --- */
 .dropdown-content {
-    display: none; /* Hidden by default */
+    display: none;
     position: absolute;
     background-color: white;
-    min-width: 280px; /* Wide enough for long service names */
+    min-width: 280px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     z-index: 1;
-    top: 100%;
+    /* UNIVERSAL SOLUTION: 100% always means "Bottom of container" */
+    /* Since container shrinks, this moves up automatically */
+    top: 100%; 
     left: 0;
     border-top: 3px solid var(--primary-green);
 }
 
 .dropdown-content li {
-    margin: 0;
     display: block;
+    height: auto;
 }
 
 .dropdown-content a {
@@ -170,29 +223,21 @@ body {
     display: block;
     border-bottom: 1px solid #eee;
     font-size: 0.9rem;
+    height: auto;
 }
 
 .dropdown-content a:hover {
     background-color: #f1f1f1;
 }
 
-/* Show dropdown on hover */
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
-.btn-nav {
-    background-color: var(--secondary-green);
-    color: white !important;
-    padding: 8px 16px;
-    border-radius: 4px;
-}
-
 /* =========================================
-   6. HERO SECTIONS (Banners)
+   6. HERO SECTIONS
    ========================================= */
 .hero {
-    /* Main Home Banner */
     background: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
     height: 600px;
     position: relative;
@@ -202,7 +247,6 @@ body {
     color: white;
 }
 
-/* Smaller banner for sub-pages */
 .page-header {
     background-color: var(--primary-green);
     color: white;
@@ -216,7 +260,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Darkens image for text readability */
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .hero-content {
@@ -251,10 +295,9 @@ h3 {
 }
 
 p {
-    margin-bottom: 15px; /* Adds space between paragraphs */
+    margin-bottom: 15px;
 }
 
-/* Service Lists */
 .service-list-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -283,7 +326,7 @@ footer {
    9. MOBILE RESPONSIVENESS
    ========================================= */
 .menu-toggle {
-    display: none; /* Hidden on desktop */
+    display: none;
     cursor: pointer;
 }
 
@@ -296,10 +339,24 @@ footer {
 }
 
 @media (max-width: 768px) {
+    .navbar .container {
+        height: auto;
+        padding: 10px 20px;
+        align-items: center;
+    }
+    
+    /* Disable shrink effect on mobile to prevent jumpiness */
+    .navbar.shrink .container {
+        height: auto;
+    }
+    .navbar.shrink .logo img {
+        height: 70px; /* Keep mobile logo size consistent */
+    }
+
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 115px; /* Adjust based on navbar height */
+        top: 140px; /* Adjust if needed based on topbar+logo */
         flex-direction: column;
         background-color: white;
         width: 100%;
@@ -307,6 +364,7 @@ footer {
         transition: 0.3s;
         box-shadow: 0 5px 5px rgba(0,0,0,0.1);
         padding-bottom: 20px;
+        height: auto;
     }
 
     .nav-menu.active {
@@ -316,20 +374,22 @@ footer {
     .nav-menu li {
         margin: 0;
         width: 100%;
+        display: block;
     }
 
     .nav-menu a {
         display: block;
         padding: 15px 20px;
         border-bottom: 1px solid #eee;
+        height: auto;
     }
 
-    /* Handle Dropdown on Mobile */
     .dropdown-content {
         position: static;
         box-shadow: none;
         background-color: #f9f9f9;
         display: none;
+        border-top: none;
     }
     
     .dropdown:hover .dropdown-content {
@@ -338,5 +398,9 @@ footer {
 
     .menu-toggle {
         display: block;
+    }
+    
+    .logo img {
+        height: 70px;
     }
 }

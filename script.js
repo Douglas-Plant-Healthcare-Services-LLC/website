@@ -1,13 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Mobile Menu Logic
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.querySelector('.nav-menu');
 
-    // Toggle Mobile Menu
     mobileMenu.addEventListener('click', () => {
         navMenu.classList.toggle('active');
         mobileMenu.classList.toggle('is-active');
     });
 
-    // NOTE: Dropdowns are handled via CSS :hover for simplicity. 
-    // If you need click-based dropdowns for mobile later, add logic here.
+    // 2. Shrinking Navbar Logic
+    const navbar = document.querySelector('.navbar');
+    
+    window.addEventListener('scroll', () => {
+        // When scrolled down more than 150px (approx "human chunk")
+        if (window.scrollY > 150) {
+            navbar.classList.add('shrink');
+        } else {
+            navbar.classList.remove('shrink');
+        }
+    });
 });
