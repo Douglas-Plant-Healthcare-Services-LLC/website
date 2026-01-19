@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="top-bar">
                 <div class="container">
                     <span><i class="fas fa-phone-alt"></i> 732-732-2712</span>
-                    <span><i class="fas fa-map-marker-alt"></i> Serving Monmouth and Ocean County, NJ</span>
+                    <span>Serving Monmouth and Ocean County, NJ <i class="fas fa-map-marker-alt"></i></span>
                 </div>
             </div>
 
@@ -40,7 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             </ul>
                         </li>
                         <li><a href="commercial.html">Commercial</a></li>
-                        <li><a href="portal.html" class="btn-nav">Customer Portal</a></li>
+                        <li><a href="portal.html">Customer Portal</a></li>
+                        <li><a href="portal.html" class="btn-nav">Get a Quote</a></li>
                     </ul>
                 </div>
             </nav>
