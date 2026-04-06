@@ -6,6 +6,7 @@
     <title>Get a Quote | Douglas Plant Healthcare</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
 </head>
 <body>
     
@@ -22,31 +23,90 @@
                 Once submitted, you will be redirected to our secure scheduling system.
             </p>
             
-            <form action="YOUR_ARBORGOLD_POST_URL" method="POST">
+            <form id="webleadform" action="https://douglasphcservices.arborgold.net/ag/jobinformation/webleadsapi/add" method="POST">
                 
-                <div style="margin-bottom: 15px;">
-                    <label for="FirstName" style="display:block; margin-bottom:5px; font-weight:500;">First Name *</label>
-                    <input type="text" id="FirstName" name="FirstName" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                    <div style="flex: 1;">
+                        <label for="FirstName" style="display:block; margin-bottom:5px; font-weight:500;">First Name *</label>
+                        <input type="text" id="FirstName" name="FirstName" maxlength="150" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="LastName" style="display:block; margin-bottom:5px; font-weight:500;">Last Name *</label>
+                        <input type="text" id="LastName" name="LastName" maxlength="150" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    </div>
                 </div>
 
                 <div style="margin-bottom: 15px;">
-                    <label for="LastName" style="display:block; margin-bottom:5px; font-weight:500;">Last Name *</label>
-                    <input type="text" id="LastName" name="LastName" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <label for="Company" style="display:block; margin-bottom:5px; font-weight:500;">Company Name</label>
+                    <input type="text" id="Company" name="Company" maxlength="150" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
                 </div>
 
                 <div style="margin-bottom: 15px;">
-                    <label for="Email" style="display:block; margin-bottom:5px; font-weight:500;">Email Address *</label>
-                    <input type="email" id="Email" name="Email" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <label for="Address" style="display:block; margin-bottom:5px; font-weight:500;">Address *</label>
+                    <input type="text" id="Address" name="Address" maxlength="150" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+
+                <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                    <div style="flex: 2;">
+                        <label for="City" style="display:block; margin-bottom:5px; font-weight:500;">City *</label>
+                        <input type="text" id="City" name="City" maxlength="150" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="State" style="display:block; margin-bottom:5px; font-weight:500;">State *</label>
+                        <input type="text" id="State" name="State" maxlength="150" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="Zip" style="display:block; margin-bottom:5px; font-weight:500;">Zip *</label>
+                        <input type="text" id="Zip" name="Zip" maxlength="10" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                    <div style="flex: 1;">
+                        <label for="Phone" style="display:block; margin-bottom:5px; font-weight:500;">Phone Number *</label>
+                        <input type="text" id="Phone" name="Phone" maxlength="75" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="Email" style="display:block; margin-bottom:5px; font-weight:500;">Email Address *</label>
+                        <input type="email" id="Email" name="Email" maxlength="125" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    </div>
                 </div>
 
                 <div style="margin-bottom: 15px;">
-                    <label for="Phone" style="display:block; margin-bottom:5px; font-weight:500;">Phone Number *</label>
-                    <input type="tel" id="Phone" name="Phone" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <label for="MarketSource" style="display:block; margin-bottom:5px; font-weight:500;">How did you hear about us? *</label>
+                    <select id="MarketSource" name="MarketSource" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background: white;">
+                        <option value="">Select an option...</option>
+                        <option value="Equipment/Truck">Equipment/Truck</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Friend">Friend</option>
+                        <option value="Google Search">Google Search</option>
+                        <option value="ISA web site search">ISA web site search</option>
+                        <option value="Landscaper">Landscaper</option>
+                        <option value="Neighbor">Neighbor</option>
+                        <option value="Newspaper ">Newspaper </option>
+                        <option value="Nursery ">Nursery </option>
+                        <option value="Prior Customer">Prior Customer</option>
+                        <option value="Referral ">Referral </option>
+                        <option value="Referral - Arborist">Referral - Arborist</option>
+                        <option value="Tree Service">Tree Service</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="Subject" style="display:block; margin-bottom:5px; font-weight:500;">Subject *</label>
+                    <input type="text" id="Subject" name="Subject" maxlength="125" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
                 </div>
 
                 <div style="margin-bottom: 20px;">
-                    <label for="Comments" style="display:block; margin-bottom:5px; font-weight:500;">How can we help you?</label>
-                    <textarea id="Comments" name="Comments" rows="5" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+                    <label for="Message" style="display:block; margin-bottom:5px; font-weight:500;">Message</label>
+                    <textarea id="Message" name="Message" rows="5" maxlength="500" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+                </div>
+
+                <input type="hidden" id="CompanyCode" name="CompanyCode" value="R91-XMW5KR-Y4POL2-S8TUUP">
+                <input type="hidden" id="RedirectUrl" name="RedirectUrl" value="https://douglasplanthealthcare.com/thankyou.html">
+
+                <div style="margin-bottom: 20px;">
+                    <div class="g-recaptcha" data-sitekey="6LezVm0rAAAAAFmqD38-XeMW6yos-UdlLAaeFVrR" data-size="compact"></div>
                 </div>
 
                 <button type="submit" class="btn-primary" style="width: 100%; font-size: 1.1rem; text-align:center;">Submit Request</button>
@@ -57,6 +117,45 @@
     <footer>
         <div class="container"><p>&copy; 2026 Douglas Plant Healthcare Services LLC. All Rights Reserved.</p></div>
     </footer>
+    
     <script src="script.js"></script>
+
+    <script>
+        document.getElementById("webleadform").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const response = grecaptcha.enterprise.getResponse();
+
+            if (response.length === 0) {
+                alert("Please verify that you're not a robot.");
+                return;
+            }
+
+            const form = e.target;
+            const formData = new FormData(form);
+            const urlEncodedData = new URLSearchParams(formData).toString();
+
+            try {
+                const fetchResponse = await fetch(form.action, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: urlEncodedData
+                });
+
+                if (fetchResponse.ok) {
+                    const redirectUrl = form.querySelector("[name='RedirectUrl']")?.value;
+                    if (redirectUrl) window.location.href = redirectUrl;
+                } else {
+                    const errorText = await fetchResponse.text();
+                    alert(`Error submitting form: ${errorText}`);
+                }
+            } catch (error) {
+                console.error("Error submitting form:", error);
+                alert("A network error occurred. Please try again.");
+            }
+        });
+    </script>
 </body>
 </html>
