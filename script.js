@@ -40,11 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             </ul>
                         </li>
                         <li><a href="commercial.html">Commercial</a></li>
-                        <li><a href="portal.html">Customer Portal</a></li>
-                        <li><a href="portal.html" class="btn-nav">Get a Quote</a></li>
+                        <li><a href="quote.html" class="btn-nav">Get a Quote</a></li>
                     </ul>
-                </div>
-            </nav>
         `;
     }
 
