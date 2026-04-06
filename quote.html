@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get a Quote | Douglas Plant Healthcare</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    
+    <div id="global-header"></div>
+
+    <header class="page-header">
+        <h1>Request a Consultation or Quote</h1>
+    </header>
+
+    <section class="section-padding">
+        <div class="container" style="max-width: 700px;">
+            <p style="text-align: center; margin-bottom: 30px;">
+                Please fill out the form below to request a quote or schedule a consultation with our Certified Arborists. 
+                Once submitted, you will be redirected to our secure scheduling system.
+            </p>
+            
+            <form action="YOUR_ARBORGOLD_POST_URL" method="POST">
+                
+                <div style="margin-bottom: 15px;">
+                    <label for="FirstName" style="display:block; margin-bottom:5px; font-weight:500;">First Name *</label>
+                    <input type="text" id="FirstName" name="FirstName" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="LastName" style="display:block; margin-bottom:5px; font-weight:500;">Last Name *</label>
+                    <input type="text" id="LastName" name="LastName" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="Email" style="display:block; margin-bottom:5px; font-weight:500;">Email Address *</label>
+                    <input type="email" id="Email" name="Email" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="Phone" style="display:block; margin-bottom:5px; font-weight:500;">Phone Number *</label>
+                    <input type="tel" id="Phone" name="Phone" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label for="Comments" style="display:block; margin-bottom:5px; font-weight:500;">How can we help you?</label>
+                    <textarea id="Comments" name="Comments" rows="5" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary" style="width: 100%; font-size: 1.1rem; text-align:center;">Submit Request</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container"><p>&copy; 2026 Douglas Plant Healthcare Services LLC. All Rights Reserved.</p></div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
