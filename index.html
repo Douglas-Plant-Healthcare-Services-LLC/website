@@ -15,8 +15,8 @@
         <div class="hero-overlay"></div>
         <div class="container hero-content">
             <h1>Trusted Local Arborists Serving Ocean &amp; Monmouth County</h1>
-            <div style="font-size: 1.3rem; margin-top: -10px; margin-bottom: 20px; opacity: 0.88; font-weight: 500; letter-spacing: 0.02em;">
-                <span id="town-cycler">Spring Lake, NJ</span>
+            <div id="town-roller">
+                <div id="town-track"></div>
             </div>
             <p>With more than 30 years of experience, Douglas Plant Healthcare delivers expertise and integrity homeowners across Monmouth County can trust.</p>
             <a href="quote.html" class="btn-primary">Request an Estimate</a>
@@ -66,18 +66,25 @@
     <script src="script.js"></script>
 
     <style>
-        #town-cycler {
-            display: inline-block;
-            transition: opacity 0.7s ease, transform 0.7s ease;
+        #town-roller {
+            overflow: hidden;
+            width: 100%;
+            margin: -5px 0 22px;
+        }
+        #town-track {
+            display: flex;
+            will-change: transform;
+        }
+        .town-item {
+            flex: 0 0 33.333%;
+            text-align: center;
             color: white;
-        }
-        #town-cycler.fade-out {
-            opacity: 0;
-            transform: translateY(-8px);
-        }
-        #town-cycler.fade-in {
-            opacity: 1;
-            transform: translateY(0);
+            font-size: 1.15rem;
+            font-weight: 500;
+            opacity: 0.88;
+            letter-spacing: 0.03em;
+            padding: 4px 6px;
+            white-space: nowrap;
         }
     </style>
 
@@ -91,18 +98,38 @@
             "Toms River, NJ", "Jackson, NJ", "Lakewood, NJ", "Berkeley, NJ",
             "Freehold, NJ", "Farmingdale, NJ", "Ocean Township, NJ", "Little Silver, NJ"
         ];
-        let townIndex = 0;
-        const cycler = document.getElementById('town-cycler');
+
+        const roller = document.getElementById('town-roller');
+        const track  = document.getElementById('town-track');
+        let nextIndex = 0;
+
+        function appendTown() {
+            const el = document.createElement('span');
+            el.className = 'town-item';
+            el.textContent = towns[nextIndex % towns.length];
+            nextIndex++;
+            track.appendChild(el);
+        }
+
+        // Seed 4 towns: 3 visible + 1 staged just off the right edge
+        for (let i = 0; i < 4; i++) appendTown();
 
         setInterval(() => {
-            cycler.classList.add('fade-out');
+            const itemW = roller.offsetWidth / 3;
+            track.style.transition = 'transform 0.75s cubic-bezier(0.4, 0, 0.2, 1)';
+            track.style.transform  = `translateX(-${itemW}px)`;
+
             setTimeout(() => {
-                townIndex = (townIndex + 1) % towns.length;
-                cycler.textContent = towns[townIndex];
-                cycler.classList.remove('fade-out');
-                cycler.classList.add('fade-in');
-            }, 700);
-        }, 2500);
+                track.style.transition = 'none';
+                track.removeChild(track.firstElementChild);
+                track.style.transform  = 'translateX(0)';
+                appendTown();
+                // Double rAF to let the browser commit the reset before re-enabling transition
+                requestAnimationFrame(() => requestAnimationFrame(() => {
+                    track.style.transition = 'transform 0.75s cubic-bezier(0.4, 0, 0.2, 1)';
+                }));
+            }, 780);
+        }, 2600);
     </script>
 </body>
 </html>
