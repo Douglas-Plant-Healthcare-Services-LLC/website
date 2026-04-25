@@ -121,7 +121,7 @@
     <script src="script.js"></script>
 
     <script>
-        document.getElementById("webleadform").addEventListener("submit", function (e) {
+        document.getElementById("webleadform").addEventListener("submit", async function (e) {
             e.preventDefault();
 
             const captchaResponse = grecaptcha.enterprise.getResponse();
@@ -131,10 +131,30 @@
                 return;
             }
 
-            // Submit natively — ArborGold's API is not CORS-enabled and expects
-            // a standard HTML form POST, not a fetch() request. The RedirectUrl
-            // hidden field tells ArborGold where to send the user after processing.
-            this.submit();
+            const form = e.target;
+            const formData = new FormData(form);
+            const urlEncodedData = new URLSearchParams(formData).toString();
+
+            try {
+                const fetchResponse = await fetch(form.action, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: urlEncodedData
+                });
+
+                if (fetchResponse.ok) {
+                    const redirectUrl = form.querySelector("[name='RedirectUrl']")?.value;
+                    if (redirectUrl) window.location.href = redirectUrl;
+                } else {
+                    const errorText = await fetchResponse.text();
+                    alert(`Error submitting form: ${errorText}`);
+                }
+            } catch (error) {
+                console.error("Error submitting form:", error);
+                alert("A network error occurred. Please try again.");
+            }
         });
     </script>
 </body>
