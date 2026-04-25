@@ -14,7 +14,10 @@
     <section class="hero">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
-            <h1>Trusted Local Arborists Serving Spring Lake, NJ</h1>
+            <h1>Trusted Local Arborists Serving Ocean &amp; Monmouth County</h1>
+            <div style="font-size: 1.3rem; margin-top: -10px; margin-bottom: 20px; opacity: 0.88; font-weight: 500; letter-spacing: 0.02em;">
+                <span id="town-cycler">Spring Lake, NJ</span>
+            </div>
             <p>With more than 30 years of experience, Douglas Plant Healthcare delivers expertise and integrity homeowners across Monmouth County can trust.</p>
             <a href="quote.html" class="btn-primary">Request an Estimate</a>
         </div>
@@ -61,5 +64,45 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <style>
+        #town-cycler {
+            display: inline-block;
+            transition: opacity 0.7s ease, transform 0.7s ease;
+            color: white;
+        }
+        #town-cycler.fade-out {
+            opacity: 0;
+            transform: translateY(-8px);
+        }
+        #town-cycler.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+
+    <script>
+        const towns = [
+            "Spring Lake, NJ", "Manasquan, NJ", "Sea Girt, NJ", "Brielle, NJ",
+            "Wall Township, NJ", "Belmar, NJ", "Asbury Park, NJ", "Neptune, NJ",
+            "Rumson, NJ", "Fair Haven, NJ", "Red Bank, NJ", "Middletown, NJ",
+            "Holmdel, NJ", "Colts Neck, NJ", "Shrewsbury, NJ", "Howell, NJ",
+            "Brick, NJ", "Mantoloking, NJ", "Point Pleasant, NJ",
+            "Toms River, NJ", "Jackson, NJ", "Lakewood, NJ", "Berkeley, NJ",
+            "Freehold, NJ", "Farmingdale, NJ", "Ocean Township, NJ", "Little Silver, NJ"
+        ];
+        let townIndex = 0;
+        const cycler = document.getElementById('town-cycler');
+
+        setInterval(() => {
+            cycler.classList.add('fade-out');
+            setTimeout(() => {
+                townIndex = (townIndex + 1) % towns.length;
+                cycler.textContent = towns[townIndex];
+                cycler.classList.remove('fade-out');
+                cycler.classList.add('fade-in');
+            }, 700);
+        }, 2500);
+    </script>
 </body>
 </html>

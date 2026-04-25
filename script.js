@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         headerPlaceholder.innerHTML = `
             <div class="top-bar">
                 <div class="container">
-                    <span><i class="fas fa-phone-alt"></i> 732-732-2712</span>
+                    <a href="tel:7327322712" style="color:white;text-decoration:none;"><i class="fas fa-phone-alt"></i> 732-732-2712</a>
                     <span>Serving Monmouth and Ocean County, NJ <i class="fas fa-map-marker-alt"></i></span>
                 </div>
             </div>
@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <li><a href="services.html#diagnosis">Plant Health Diagnosis</a></li>
                                 <li><a href="services.html#fertilization">Fertilization & Soil Rx</a></li>
                                 <li><a href="services.html#insects">Insect & Disease Treatment</a></li>
+                                <li><a href="services.html#rootcare">Root Care</a></li>
                                 <li><a href="services.html#tick">Tick & Mosquito Control</a></li>
                                 <li><a href="services.html#deer">Deer Repellant Programs</a></li>
                                 <li><a href="services.html#pruning">Expert Tree Pruning</a></li>
