@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <nav class="navbar">
                 <div class="container">
                     <a href="index.html" class="logo">
-                        <img src="Images/logo_crop.png" alt="Douglas Plant Healthcare Services">
+                        <img src="Images/logo_crop.png" alt="Douglas Plant Healthcare Services — Certified Arborists Serving Ocean and Monmouth County, NJ">
                     </a>
                     <div class="menu-toggle" id="mobile-menu">
                         <span class="bar"></span>
